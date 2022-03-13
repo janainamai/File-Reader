@@ -11,10 +11,10 @@ import java.util.List;
 
 class SaleServiceTest {
 
+    private final SaleService service = new SaleService();
+
     @Test
     void testExtractToSaleEntities() {
-        SaleService service = new SaleService();
-
         List<String> lines = new ArrayList<>();
         lines.add("001ç1234567891234çDiegoç50000");
         lines.add("001ç3245678865434çRenatoç40000.99");
@@ -72,8 +72,6 @@ class SaleServiceTest {
 
     @Test
     void testGetMostExpansiveSale() throws Exception {
-        SaleService service = new SaleService();
-
         Item item1sale10 = new Item();
         item1sale10.setId("1");
         item1sale10.setQuantity(10);
@@ -121,8 +119,6 @@ class SaleServiceTest {
 
     @Test
     void testWorstSalesmanEver() throws Exception {
-        SaleService service = new SaleService();
-
         Item item1sale10 = new Item();
         item1sale10.setId("1");
         item1sale10.setQuantity(10);
