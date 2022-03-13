@@ -6,27 +6,25 @@ import java.util.List;
 
 import static java.util.Arrays.stream;
 
-// 002çCNPJçNameçBusiness Area
-// 002ç2345675434544345çJose da SilvaçRural
 public class CustomerExtract {
 
-    private static final int cnpj = 1;
-    private static final int name = 2;
-    private static final int bussinesArea = 3;
+    private static final int CNPJ = 1;
+    private static final int NAME = 2;
+    private static final int BUSSINES_AREA = 3;
 
-    public static List<Customer> extract(List<String> linesOfCustomer) {
+    public static List<Customer> extractToEntities(List<String> linesOfCustomer) {
         return linesOfCustomer.stream()
-                .map(CustomerExtract::extactToCustomer)
+                .map(CustomerExtract::extractToCustomer)
                 .toList();
     }
 
-    private static Customer extactToCustomer(String customerLine) {
+    private static Customer extractToCustomer(String customerLine) {
         List<String> partsOfCustomer = stream(customerLine.split("ç")).toList();
 
         Customer customer = new Customer();
-        customer.setCnpj(partsOfCustomer.get(cnpj));
-        customer.setName(partsOfCustomer.get(name));
-        customer.setBusinessArea(partsOfCustomer.get(bussinesArea));
+        customer.setCnpj(partsOfCustomer.get(CNPJ));
+        customer.setName(partsOfCustomer.get(NAME));
+        customer.setBusinessArea(partsOfCustomer.get(BUSSINES_AREA));
 
         return customer;
     }

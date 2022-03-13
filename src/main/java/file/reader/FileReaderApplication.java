@@ -11,13 +11,17 @@ public class FileReaderApplication {
     private static final WriteDatFile writeDatFile = new WriteDatFile();
 
     public static void main(String[] args) {
-        String homepath = System.getenv("HOMEPATH");
+        try {
+            String homepath = System.getenv("HOMEPATH");
 
-        String directoryToRead = homepath + "/data/in";
-        List<String> records = readDatFile.read(directoryToRead);
+            String directoryToRead = homepath + "/data/in";
+            List<String> records = readDatFile.read(directoryToRead);
 
-        String directoryToWrite = homepath + "/data/out/result.done.dat";
-        writeDatFile.createFileResult(directoryToWrite, records);
+            String directoryToWrite = homepath + "/data/out/result.done.dat";
+            writeDatFile.createFileResult(directoryToWrite, records);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
     }
 
 }

@@ -17,15 +17,15 @@ public class SaleService {
 
     public List<Sale> extractToSaleEntities(List<String> records) {
         List<String> linesOfSale = RecordExtract.getRecordsOfCode(records, SALE_CODE);
-        return SaleExtract.extract(linesOfSale);
+        return SaleExtract.extractToEntities(linesOfSale);
     }
 
-    public Sale getMostExpansiveSale(List<Sale> sales) {
+    public Sale getMostExpansiveSale(List<Sale> sales) throws Exception {
         Map<Sale, BigDecimal> saleTotalPrice = agroupSaleWithTotalPrice(sales);
         return getMostExpansiveSale(saleTotalPrice);
     }
 
-    public String getWorstSalesmanEver(List<Sale> sales) {
+    public String getWorstSalesmanEver(List<Sale> sales) throws Exception {
         Map<String, BigDecimal> salesmanTotalPrice = agroupSalesmanWithTotalPrice(sales);
 
         return getSalesmanOfLeastExpansiveSale(salesmanTotalPrice);
@@ -62,13 +62,13 @@ public class SaleService {
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
-    private Sale getMostExpansiveSale(Map<Sale, BigDecimal> saleTotalPrice) {
+    private Sale getMostExpansiveSale(Map<Sale, BigDecimal> saleTotalPrice) throws Exception {
         BigDecimal mostExpansiveValue = Collections.max(saleTotalPrice.values());
         return FileReaderUtils.getKeyByValue(saleTotalPrice, mostExpansiveValue);
     }
 
-    private String getSalesmanOfLeastExpansiveSale(Map<String, BigDecimal> salesmanTotalPrice) {
-        BigDecimal lassExpansiveValue = Collections.max(salesmanTotalPrice.values());
+    private String getSalesmanOfLeastExpansiveSale(Map<String, BigDecimal> salesmanTotalPrice) throws Exception {
+        BigDecimal lassExpansiveValue = Collections.min(salesmanTotalPrice.values());
         return FileReaderUtils.getKeyByValue(salesmanTotalPrice, lassExpansiveValue);
     }
 

@@ -19,7 +19,7 @@ public class WriteDatFile {
     private static final CustomerService customerService = new CustomerService();
     private static final SaleService saleService = new SaleService();
 
-    public void createFileResult(String directoryAdress, List<String> records) {
+    public void createFileResult(String directoryAdress, List<String> records) throws Exception {
         List<Salesman> salesmens = salesmanService.extractToSalesmanEntities(records);
         List<Customer> customers = customerService.extractToCustomerEntities(records);
         List<Sale> sales = saleService.extractToSaleEntities(records);

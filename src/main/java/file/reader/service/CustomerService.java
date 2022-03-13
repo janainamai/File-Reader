@@ -8,10 +8,10 @@ import java.util.List;
 
 public class CustomerService {
 
-    private static final String customerCode = "002";
+    private static final String CUSTOMER_CODE = "002";
 
     public List<Customer> extractToCustomerEntities(List<String> records) {
-        List<String> linesOfCustomer = RecordExtract.getRecordsOfCode(records, customerCode);
-        return CustomerExtract.extract(linesOfCustomer);
+        List<String> linesOfCustomer = RecordExtract.getRecordsOfCode(records, CUSTOMER_CODE);
+        return CustomerExtract.extractToEntities(linesOfCustomer);
     }
 }

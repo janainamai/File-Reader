@@ -1,17 +1,21 @@
 package file.reader.utils;
 
-import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Optional;
 
 public class FileReaderUtils {
 
-    public static <T> T getKeyByValue(Map<T, BigDecimal> map, BigDecimal value) {
-        return map.entrySet()
+    public static <T, X> T getKeyByValue(Map<T, X> map, X value) throws Exception {
+        Optional<T> optional = map.entrySet()
                 .stream()
                 .filter(sale -> sale.getValue().equals(value))
                 .findFirst()
-                .map(Map.Entry::getKey)
-                .orElse(null);
+                .map(Map.Entry::getKey);
+
+        if(optional.isEmpty()) {
+            throw new Exception("No key found for value " + value.toString());
+        }
+        return optional.get();
     }
 
 }

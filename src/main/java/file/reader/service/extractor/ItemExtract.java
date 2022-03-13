@@ -9,15 +9,13 @@ import static java.lang.Double.parseDouble;
 import static java.lang.Integer.parseInt;
 import static java.util.Arrays.stream;
 
-// [Item ID-Item Quantity-Item Price]
-// [1-34-10,2-33-1.50,3-40-0.10]
 public class ItemExtract {
 
-    private static final int id = 0;
-    private static final int quantity = 1;
-    private static final int price = 2;
+    private static final int ID = 0;
+    private static final int QUANTITY = 1;
+    private static final int PRICE = 2;
 
-    public static List<Item> extract(String lineOfItems) {
+    public static List<Item> extractToEntities(String lineOfItems) {
         lineOfItems = removeKeys(lineOfItems);
         List<String> linesOfItem = extractToLinesOfItem(lineOfItems);
 
@@ -38,9 +36,9 @@ public class ItemExtract {
         List<String> partsOfItem = stream(itemLine.split("-")).toList();
 
         Item item = new Item();
-        item.setId(partsOfItem.get(id));
-        item.setQuantity(parseInt(partsOfItem.get(quantity)));
-        item.setPrice(BigDecimal.valueOf(parseDouble(partsOfItem.get(price))));
+        item.setId(partsOfItem.get(ID));
+        item.setQuantity(parseInt(partsOfItem.get(QUANTITY)));
+        item.setPrice(BigDecimal.valueOf(parseDouble(partsOfItem.get(PRICE))));
 
         return item;
     }

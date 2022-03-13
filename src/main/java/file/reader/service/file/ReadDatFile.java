@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ReadDatFile {
 
-    public List<String> read(String directoryAdress) {
+    public List<String> read(String directoryAdress) throws Exception {
         List<String> lines = new ArrayList<>();
 
         try (DirectoryStream<Path> paths = Files.newDirectoryStream(Paths.get(directoryAdress))) {
@@ -26,7 +26,7 @@ public class ReadDatFile {
             }
 
         } catch (IOException | DirectoryIteratorException ex) {
-            System.err.println(ex.getMessage());
+            throw new Exception("Error reading files " + ex.getMessage());
         }
 
         return RecordExtract.extractRecordFromLineIfExistMoreThanOne(lines, "/");

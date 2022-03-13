@@ -7,9 +7,10 @@ import static java.util.Arrays.stream;
 
 public class RecordExtract {
 
-    /**
-     * Exemple of line with more than one record: 001ç1234567891234çDiegoç50000 001ç3245678865434çRenatoç40000.99
-     */
+    private static final String CURRENT_SEPARATOR_OF_RECORDS = " ";
+    private static final String CODE_OF_RECORDS_STARTS_WITH = "00";
+    private static final String SEPARATOR = CURRENT_SEPARATOR_OF_RECORDS + CODE_OF_RECORDS_STARTS_WITH;
+
     public static List<String> extractRecordFromLineIfExistMoreThanOne(List<String> lines, String separator) {
         List<String> records = new ArrayList<>();
 
@@ -31,7 +32,7 @@ public class RecordExtract {
     }
 
     private static boolean hasMoreThanOneRecord(String line) {
-        int indexSeparator = line.indexOf(" 00");
+        int indexSeparator = line.indexOf(SEPARATOR);
         return indexSeparator != -1;
     }
 
@@ -41,7 +42,7 @@ public class RecordExtract {
     }
 
     private static String insertSeparatorBetweenRecords(String line, String separator) {
-        return line.replace(" 00", separator + "00");
+        return line.replace(SEPARATOR, separator + CODE_OF_RECORDS_STARTS_WITH);
     }
 
 }
